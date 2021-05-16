@@ -1,0 +1,59 @@
+﻿@model MobilePhoneBD.Models.ViewMode.IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center row justify-content-between">
+    <form asp-action="Index">
+        <select name="catId" onchange="GetMan()" id="cat">
+            <option value="0">Все</option>
+            @foreach (var cat in Model.Category)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        </select>
+        <select name="manId" id="man" class="m-2">
+            <option value="0">Все</option>
+         </select>
+        <button type="submit" class="btn-info">Показать</button>
+    </form>
+    <div>
+        <button class="btn-primary" onclick="location.href='/home/create'">Создать</button>
+    </div>
+</div>
+    <div class="d-inline-flex">
+        @foreach (var prod in Model.Products)
+        {
+        <div class="card border shadow-lg m-2">
+            <div class="p-2">
+                <img style="width:250px; border-radius:50%;" src="@prod.Link" />
+                <h6>@prod.Name</h6>
+                <p><label>@prod.Description</label></p>
+                <div class="d-inline justify-content-between">
+                    <div>
+                        <label>Цена:@prod.Price</label>
+                    </div>
+                    <div>
+                        <label>Кол-во:@prod.Quality</label>
+                    </div>
+
+                </div>
+                <div class="row justify-content-between pt-1 pl-4 pr-4">
+                    <div>
+                        <button class="btn-danger" onclick="Delete(@prod.Id)">Удалить</button>
+                    </div>
+                    <div>
+                        <button class="btn-success" onclick="BasketAdd(@prod.Id,@prod.Quality)">В корзину</button>
+                    </div>
+                </div>
+                <div>
+                    
+                 <button class="btn-info mt-2" type="submit" onclick="location.href ='/home/edit?id=@prod.Id'">изменить</button>
+                    
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+

@@ -1,0 +1,58 @@
+﻿@model MobilePhoneBD.Models.ViewMode.IndexViewModel
+@{
+    ViewData["Title"] = "корзина";
+}
+
+
+<div class="text-center row justify-content-between">
+    <form asp-action="Index">
+        <select name="catId" onchange="GetMan()" id="cat">
+            <option value="0">Все</option>
+            @foreach (var cat in Model.Category)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        </select>
+        <select name="manId" id="man" class="m-2">
+            <option value="0">Все</option>
+        </select>
+        <button type="submit" class="btn-info">Показать</button>
+        <label class="ml-2">Сумма покупки:</label>
+        <label id="buySum">@ViewBag.Sum</label>
+    </form>
+    @if (Model.Products.Count != 0)
+    {
+    <button type="button" class="btn-success" onclick="Buy()">Купить</button>
+    }
+</div>
+<div class="d-inline-flex">
+    @foreach (var prod in Model.Products)
+    {
+        <div class="card border shadow-lg m-2">
+            <div class="p-2">
+                <img style="width:250px;border-radius:50%;" src="@prod.Link" />
+                <h6>@prod.Name</h6>
+                <p><label>@prod.Description</label></p>
+                <div class="d-inline justify-content-between">
+                    <div>
+                        <label>Цена:@prod.Price</label>
+                    </div>
+                    <div>
+                        <label>Кол-во:@prod.Quality</label>
+                    </div>
+                    <div>
+                        <label >Сумма:@(prod.Quality*prod.Price)</label>
+                        <input type="hidden" name="sum" value="@(prod.Quality*prod.Price)"/>
+                    </div>
+                </div>
+                <div class="d-inline justify-content-between pt-1">
+                    <div>
+                        <button class="btn-danger" onclick="BasketDelete(@prod.Id)">Удалить</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

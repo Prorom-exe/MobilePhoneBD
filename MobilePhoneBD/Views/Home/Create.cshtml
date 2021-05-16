@@ -1,0 +1,60 @@
+﻿@model MobilePhoneBD.Models.ViewMode.CreateViewModel
+@{
+    ViewData["Title"] = "Создание товара";
+}
+<form asp-action="Create" method="post"  enctype="multipart/form-data">
+    <div class="card border shadow-lg p-0">
+        <div class="m-5">
+            <h3>Создание нового товара</h3>
+            <div class="">
+
+                <label>Название</label>
+                <p><input asp-for="Name" required /></p>
+            </div>
+            <div>
+                <label>Описание</label>
+                <p><input asp-for="Description" required /></p>
+            </div>
+            <div>
+                <label>Цена</label>
+                <p><input asp-for="Price" required type="number" /></p>
+            </div>
+            <div>
+                <label>Количество</label>
+                <p><input asp-for="Quality" required type="number" min="1" /></p>
+            </div>
+            <div>
+                <label>Категория</label>
+                <p>
+                    <select asp-for="CatId" id="cat" onchange="GetMan()">
+                        <option disabled selected>Выберите</option>
+                        @foreach(var cat in Model.Category)
+                        {
+                            <option value="@cat.Id">@cat.Name</option>
+                        }
+                    </select>
+                </p>
+                <p>
+                    <label>Если нужной категории нету в списке, то напишите ниже.В противном случае оставьте поле путым</label>
+                </p>
+                <p><input asp-for="NewCat" onchange="New()" id="newCat" /></p>
+            </div>
+            <div>
+                <label>Производитель</label>
+                <p>
+                    <select asp-for="ManId" id="man">
+                    </select>
+                </p>
+                <p>
+                    <label>Если нужного производителе нету в списке, то напишите ниже.В противном случае оставьте поле путым</label>
+                </p>
+                <p><input asp-for="NewMan" id="newMan" /></p>
+            </div>
+            <div>
+                <label>Фото</label>
+                <p><input type="file" asp-for="UploadedFile" required/></p>
+            </div>
+            <button type="submit" class="btn-success">Добавить</button>
+        </div>
+    </div>
+</form>

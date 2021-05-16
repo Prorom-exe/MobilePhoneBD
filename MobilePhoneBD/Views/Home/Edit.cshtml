@@ -1,0 +1,35 @@
+﻿@model MobilePhoneBD.Models.ViewMode.EditViewModel
+
+@{
+    ViewData["Title"] = "Редактирование товара";
+}
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="card border shadow-lg p-0">
+        <div class="m-5">
+            <h3>Создание нового товара</h3>
+            <div class="">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <label>Название</label>
+                <p><input asp-for="Name" required /></p>
+            </div>
+            <div>
+                <label>Описание</label>
+                <p><input asp-for="Description" required /></p>
+            </div>
+            <div>
+                <label>Цена</label>
+                <p><input asp-for="Price" required  /></p>
+            </div>
+            <div>
+                <label>Количество</label>
+                <p><input asp-for="Quality" required type="number" min="1" /></p>
+            </div>
+            
+            <div>
+                <label>Фото</label>
+                <p><input type="file" asp-for="File"  /></p>
+            </div>
+            <button type="submit" class="btn-success">Изменить</button>
+        </div>
+    </div>
+</form>
