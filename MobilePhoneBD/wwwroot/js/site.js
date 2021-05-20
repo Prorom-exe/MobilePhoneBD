@@ -88,7 +88,7 @@ function BasketDelete(id) {
     if (confirm("Вы действительно хотите удалить этот товар?")) {
         const url = "/api/AllApi/BasketDelete?"
         const xhr = new XMLHttpRequest()
-        xhr.open("GET", url + "Id=" + id)
+        xhr.open("GET", url + "id=" + id)
         xhr.onload = () => {
             alert("Товар успешно удалён")
             location.reload()
